@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>會員首頁</title>
+
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Easy UI CSS -->
+<link th:href="@{/vendor/easyui/css/easyui.css}" href="../vendor/easyui/css/easyui.css" rel="stylesheet" />
+<link th:href="@{/vendor/easyui/css/icon.css}" href="../vendor/easyui/css/icon.css" rel="stylesheet" />
+<link th:href="@{/vendor/easyui/css/effects.css}" href="../vendor/easyui/css/effects.css" rel="stylesheet" />
+
+<style>
+
+#logout-container {
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: colum;
+	margin-top: 30px;
+}
+
+#logout-btn {
+	position: flex;
+	margin-right: 25%;
+	font-size: 16px;
+	cursor: pointer;
+	color: #66B3FF;
+	text-decoration: underline;
+}
+
+#home-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: colum;
+}
+
+.datagrid-row {
+	cursor: pointer;
+}
+
+
+@media screen and (min-width: 800px) and (max-width: 900px){
+    #logout-btn {
+		margin-right: 5%;
+    } 
+}
+
+@media screen and (min-width: 900px) and (max-width: 1000px){
+    #logout-btn {
+		margin-right: 10%;
+    } 
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1200px){
+    #logout-btn {
+		margin-right: 17%;
+    } 
+}
+
+</style>
+
+</head>
+
+<body>
+	<div id="logout-container">
+		 <div id = "logout-btn">登出</div>
+	</div>
+	<div id="home-container">
+		<table id="dg" title="Member Accounts" style="width:700px;height:440px" toolbar="#toolbar" pagination="true" idField="id" rownumbers="true" fitColumns="true" singleSelect="true">
+        	<thead>
+            	<tr>
+                	<th field="account" width="50">帳號</th>
+                	<th field="password" width="50">密碼</th>
+                	<th field="name" width="50">姓名</th>
+                	<th field="email" width="50">信箱</th>
+            	</tr>
+        	</thead>
+    	</table>
+    </div>
+	<!-- /#wrapper -->
+
+	<!-- jQuery -->
+	<script th:src="@{/vendor/jquery/jquery.min.js}" src="../vendor/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- Easy UI JavaScript -->
+	<script th:src="@{/vendor/easyui/js/jquery.easyui.min.js}" src="../vendor/easyui/js/jquery.easyui.min.js"></script>
+	<script th:src="@{/vendor/easyui/js/jquery.edatagrid.js}" src="../vendor/easyui/js/jquery.edatagrid.js"></script>
+</body>
+
+<script type="text/javascript">
+$(function(){
+	var pageSize = isNaN($(".pagination-page-list :first :selected").val()) ? 10 : $(".pagination-page-list :first :selected").val();
+	var index = isNaN($(".pagination-num:first").val() - 1) ? 0 : $(".pagination-num:first").val() - 1;
+    $('#dg').edatagrid({
+    	onClickRow: updateMember,
+        url: '/pchome-member/api/user/member-account/',
+    });
+});
+
+var updateMember = function(rowIndex, rowData, value) {
+	window.location.assign("/pchome-member/api/user/updatemember/" + rowData.account);
+}
+
+document.getElementById('logout-btn').onclick= function() {
+    $.ajax({
+        type: "POST",
+        url: `/pchome-member/api/logout`,
+        contentType: "application/json",
+        success: function (res) {
+            if("0000" == res.messageCode) {
+            	alert("登出成功！返回登入頁面。");
+            	window.location.assign("/pchome-member");
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+};
+</script>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>登入</title>
+
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Custom CSS -->
+<link th:href="@{/dist/css/sb-admin-2.css}" href="../dist/css/sb-admin-2.css" rel="stylesheet" />
+
+<style>
+.input-group {
+	margin: 10px 0px;
+}
+
+h3 {
+	padding: 5px;
+	border-bottom: 1px solid #ddd;
+}
+
+li {
+	list-style-type: square;
+	margin: 10px 0;
+}
+
+em {
+	color: #c7254e;
+	font-style: inherit;
+	background-color: #f9f2f4;
+}
+
+.input-group-addon {
+	padding: 3px 12px;
+	width: FIT-CONTENT;
+}
+
+/* .registered { */
+
+/* } */
+
+#registered-text-div {
+	display: block;
+	text-align: right;
+	cursor: pointer;
+	color: #66B3FF;
+	text-decoration: underline;
+}
+</style>
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="row justify-content-center" style="margin-top: 30px;">
+			<div class="col-md-2">
+				<div class="well col-md-10">
+					<h3>使用者登入</h3>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" id="sizing-addon1">
+							<i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+						</span> 
+						<input type="text" id="login-account" class="form-control" placeholder="帳號" aria-describedby="sizing-addon1">
+					</div>
+					<div class="input-group input-group-md">
+						<span class="input-group-addon" id="sizing-addon1">
+							<i class="glyphicon glyphicon-lock"></i>
+						</span> 
+						<input type="password" id="login-password" class="form-control" placeholder="密碼" aria-describedby="sizing-addon1">
+					</div>
+					<div id="registered-text-div" class="input-group">
+						我要註冊
+					</div>
+					<button type="submit" class="btn btn-primary btn-block" id="login-btn">登入</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- jQuery -->
+	<script th:src="@{/vendor/jquery/jquery.min.js}" src="../vendor/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+<script type="text/javascript">
+$(function(){
+    $.ajax({
+        type: "GET",
+        url: `/pchome-member/api/user/member-account`,
+        contentType: "application/json",
+        success: function (res) {
+            if("0000" == res.messageCode) {
+            	window.location.assign("/pchome-member/api/user/home");
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+});
+
+document.getElementById('login-btn').onclick= function() {
+    $.ajax({
+        type: "POST",
+        url: `/pchome-member/api/login`,
+        data: JSON.stringify({
+            "account": $("#login-account").val(),
+            "password": $("#login-password").val()
+        }),
+        contentType: "application/json",
+        success: function (res) {
+            if("0000" == res.messageCode) {
+            	alert("登入成功！");
+            	window.location.assign("/pchome-member/api/user/home");
+            } else {
+            	alert("登入失敗，請檢查帳號密碼！");
+            }
+        },
+        error: function (e) {
+        	alert("登入失敗，請檢查帳號密碼！");
+            console.log(e);
+        }
+    });
+};
+
+document.getElementById('registered-text-div').onclick = function() {
+	window.location.assign("/pchome-member/registered");
+};
+</script>
+
+</html>

@@ -1,0 +1,13 @@
+.classpath
+.project
+.settings/
+.mvn/
+log/
+target
+target/*.*
+.externalToolBuilders/
+*.log
+*.gz
+.factorypath
+mvnw
+mvnw.cmd

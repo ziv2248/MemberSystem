@@ -1,0 +1,22 @@
+INSERT INTO `member_account` (ACCOUNT, PASSWORD, NAME, EMAIL)
+VALUES 
+('ADMIN', 'pchome0000', 'ziv', 'zoneyee2248@gmail.com'),
+('AAAAAA', 'pchome0001', 'SUPER01', 'zoneyee22481@gmail.com'),
+('BBBBBB', 'pchome0002', 'SUPER02', 'zoneyee22482@gmail.com'),
+('CCCCCC', 'pchome0003', 'SUPER03', 'zoneyee22483@gmail.com'),
+('DDDDDD', 'pchome0004', 'SUPER04', 'zoneyee22484@gmail.com'),
+('EEEEEE', 'pchome0005', 'SUPER05', 'zoneyee22485@gmail.com'),
+('FFFFFF', 'pchome0006', 'SUPER06', 'zoneyee22486@gmail.com'),
+('GGGGGG', 'pchome0007', 'SUPER07', 'zoneyee22487@gmail.com'),
+('HHHHHH', 'pchome0008', 'SUPER08', 'zoneyee22488@gmail.com'),
+('IIIIII', 'pchome0010', 'SUPER09', 'zoneyee22489@gmail.com'),
+('JJJJJJ', 'pchome0011', 'SUPER10', 'zoneyee224810@gmail.com'),
+('KKKKKK', 'pchome0012', 'SUPER11', 'zoneyee224811@gmail.com'),
+('LLLLLL', 'pchome0013', 'SUPER12', 'zoneyee224812@gmail.com'),
+('MMMMMM', 'pchome0014', 'SUPER13', 'zoneyee224813@gmail.com'),
+('NNNNNN', 'pchome0015', 'SUPER14', 'zoneyee224814@gmail.com'),
+('OOOOOO', 'pchome0016', 'SUPER15', 'zoneyee224815@gmail.com'),
+('PPPPPP', 'pchome0017', 'SUPER16', 'zoneyee224816@gmail.com'),
+('QQQQQQ', 'pchome0018', 'SUPER17', 'zoneyee224817@gmail.com'),
+('RRRRRR', 'pchome0019', 'SUPER18', 'zoneyee224818@gmail.com'),
+('SSSSSS', 'pchome0020', 'SUPER19', 'zoneyee224819@gmail.com');

@@ -1,0 +1,11 @@
+CREATE TABLE `member_account` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `ACCOUNT` varchar(45) COLLATE utf8_unicode_ci,
+  `PASSWORD` varchar(45) COLLATE utf8_unicode_ci,
+  `NAME` varchar(40) COLLATE utf8_unicode_ci,
+  `EMAIL` varchar(40) COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY ACCOUNT_INDEX(ACCOUNT),
+  UNIQUE KEY NAME_INDEX(NAME),
+  UNIQUE KEY EMAIL_INDEX(EMAIL)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>會員註冊</title>
+
+<!-- Bootstrap Core CSS -->
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<style>
+.card {
+	margin: 0px auto;
+	margin-top: 5px;
+	padding: 15px 20px;
+	border-radius: 6px;
+	background-color: #FCFCFC;
+}
+.mark-star {
+	color: #FF0000;
+}
+.mark-tips {
+	font-size: 8px;
+}
+#registered-error-text {
+	font-size: 10px;
+	color: #FF0000;
+}
+</style>
+
+<body>
+	<div class="card" style="width: 40rem;">
+		<div class="form-group">
+    		<label for="registered-account">帳號<span class="mark-star"> * </span><span class="mark-tips">   (至少 5 個字元，只允許英文字母) </span></label>
+    		<input type="text" class="form-control" id="registered-account" placeholder="Enter your account">
+  		</div>
+  		<div class="form-group">
+    		<label for="registered-password">密碼<span class="mark-star"> * </span><span class="mark-tips">   (至少 8 個字元，需數字、英文字母混合，不可有符號) </span></label>
+    		<input type="password" class="form-control" id="registered-password" placeholder="Enter your password">
+  		</div>
+  		<div class="form-group">
+    		<label for="registered-repassword">再次輸入密碼<span class="mark-star"> * </span></label>
+    		<input type="password" class="form-control" id="registered-repassword" placeholder="Enter your password again">
+  		</div>
+  		<div class="form-group">
+    		<label for="registered-name">姓名<span class="mark-star"> * </span><span class="mark-tips">   (至少 3 個字元，不可有符號) </span></label>
+    		<input type="text" class="form-control" id="registered-name" placeholder="Enter your name">
+  		</div>
+  		<div class="form-group">
+    		<label for="registered-email">Email<span class="mark-star"> * </span><span class="mark-tips">   (請填選正確的 Email 格式) </span></label>
+    		<input type="email" class="form-control" id="registered-email" placeholder="Enter your email" aria-describedby="emailHelp">
+  		</div>
+  		<div id="registered-error-text" class="card text-center">
+  		</div>
+  		<div class="card text-center">
+  			<button type="submit" id="registered-btn" class="btn btn-primary">Submit</button>
+  		</div>
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- jQuery -->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"
+		src="../vendor/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"
+		src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+<script type="text/javascript">
+document.getElementById('registered-btn').onclick= function() {
+	$("#registered-error-text").empty();
+	if($("#registered-password").val() == $("#registered-repassword").val()) {
+   		$.ajax({
+        	type: "POST",
+        	url: `/pchome-member/api/member-account`,
+        	data: JSON.stringify({
+            	"account": $("#registered-account").val(),
+            	"password": $("#registered-password").val(),
+            	"name": $("#registered-name").val(),
+            	"email": $("#registered-email").val()
+        	}),
+        	contentType: "application/json",
+        	success: function (res) {
+            	if("0000" == res.messageCode) {
+            		alert("新增成功！");
+            		window.location.assign("/pchome-member");
+            	} else if ("9901" == res.messageCode) {
+            		alert("新增失敗！");
+            		$("#registered-error-text").html("<p>帳號已存在</p>");
+        		} else if ("9902" == res.messageCode) {
+            		alert("新增失敗！");
+            		$("#registered-error-text").html("<p>姓名已存在</p>");
+        		} else if ("9903" == res.messageCode) {
+            		alert("新增失敗！");
+            		$("#registered-error-text").html("<p>信箱已存在</p>");
+        		} else {
+            		alert("新增失敗！");
+            		$("#registered-error-text").html(res.message);
+            	}
+        	},
+        	error: function (e) {
+        		alert("更新失敗！");
+        		$("#registered-error-text").html("<p>系統錯誤，請聯絡系統管理員！</p>");
+            	console.log(e);
+       	 	}
+   		});
+	} else {
+		alert("新增失敗！");
+		$("#registered-error-text").html("<p>密碼不相同</p>");
+	}
+};
+</script>
+
+</html>
