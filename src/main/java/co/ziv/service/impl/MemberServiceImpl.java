@@ -39,7 +39,6 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public Map<String, Object> findAll(Integer page, Integer rows) {
-//        Integer indexPage = (page - 1) * rows;
 		List<MemberAccount> members = memberRepository.findAll();
         Page<MemberAccount> pageResult = memberRepository.findAll(PageRequest.of(page , rows, Sort.by("id")));
 
@@ -106,11 +105,6 @@ public class MemberServiceImpl implements MemberService {
 	public MemberAccount findMemberAccountById(int id) {
 		return memberRepository.findMemberAccountById(id);
 	}
-	
-//	private int getRealPageIndex(int index, int maxIndex, List<MemberAccount> members) {
-//		index = index < 0 ? 0 : index;
-//		return index > maxIndex ? maxIndex : index;
-//	}
 	
 	private String getMessageCode(Exception e) {
 		String messageCode = MessageCode.ERROR;
