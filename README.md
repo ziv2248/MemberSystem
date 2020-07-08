@@ -11,16 +11,23 @@
 
 ```bash
     # path
-	\pchome-membersystem-testing\src\main\resources\dbschema
+    \pchome-membersystem-testing\src\main\resources\dbschema
 ```
 
 # Version
 
 ```bash
-	# java
-	java 1.8
-	# framwork
-	spring boot 2.1.3
-	# db
-	MariaDB 10.2.32
+    # java
+    java 1.8
+    # framwork
+    spring boot 2.1.3
+    # db
+    MariaDB 10.2.32
+```
+
+# Login Page
+
+```bash
+    # home
+    http://localhost:8080/pchome-member
 ```
