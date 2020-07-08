@@ -1,12 +1,3 @@
-# How to use
-
-```bash
-    # run project
-    mvn spring-boot:run
-    # packaging
-    mvn package
-```
-
 # Table specification
 
 ```bash
