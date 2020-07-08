@@ -55,7 +55,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterAt(loginAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/admin/**", "/actuator/**").hasRole("ADMIN")
                 .antMatchers("/api/user/**").access("hasRole('ADMIN') or hasRole('USER')")
                 .and()
                 .logout()
