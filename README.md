@@ -11,7 +11,7 @@
 
 ```bash
     # path
-    \pchome-membersystem-testing\src\main\resources\dbschema
+    \MemberSystem\src\main\resources\dbschema
 ```
 
 # Version
